@@ -388,8 +388,7 @@ export default function App() {
       {/* Botón para abrir el modal */}
       <Button variant="outlined" onClick={() => setModalOpen(true)}>
         {disciplinasSeleccionadas.length > 0
-          ? `Seleccionadas: ${disciplinasSeleccionadas.length}`
-          : 'Seleccionar disciplinas'}
+          `Disciplinas: ${disciplinasSeleccionadas.length}`
       </Button>
 
       {/* Modal */}
@@ -405,59 +404,70 @@ export default function App() {
 
       {/* Chips seleccionadas */}
       {disciplinasSeleccionadas.length > 0 && (
-        <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-          {disciplinasSeleccionadas.map((d) => {
-            const count = conteoInicial[d] || 0;
-            const color = disciplinaColors[d] || '#E0E0E0';
-            return (
-              <div
-                key={d}
-                style={{
-                  backgroundColor: '#1976d2',
-                  color: '#333',
-                  borderRadius: '24px',
-                  padding: '8px 12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  fontWeight: 'bold',
-                  fontSize: '0.9em',
-                }}
-              >
-                <span style={{ marginRight: '8px' }}>{d}</span>
-                <span
-                  style={{
-                    background: 'white',
-                    color: color,
-                    borderRadius: '50%',
-                    width: '24px',
-                    height: '24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '0.8em',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {count}
-                </span>
-                <button
-                  onClick={() => toggleDisciplina(d)}
-                  style={{
-                    marginLeft: '8px',
-                    background: 'none',
-                    border: 'none',
-                    color: '#1976d2',
-                    fontSize: '1.1em',
-                    cursor: 'pointer',
-                  }}
-                  title={`Quitar filtro ${d}`}
-                >
-                  ×
-                </button>
-              </div>
-            );
-          })}
-        </Box>
+	  
+       <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+		  {disciplinasSeleccionadas.map((d) => {
+			  
+			const count = conteoInicial[d] || 0;
+
+			return (
+			  <div
+				key={d}
+				style={{
+				  backgroundColor: '#4285F4',
+				  color: '#ffffff',
+				  borderRadius: '16px',
+				  padding: '4px 10px',
+				  display: 'flex',
+				  alignItems: 'center',
+				  fontWeight: '500',
+				  fontSize: '0.85em',
+				  height: '32px',
+				}}
+			  >
+				{/* Nombre de disciplina */}
+				<span style={{ marginRight: '8px' }}>{d}</span>
+
+				{/* Circulito con número */}
+				<span
+				  style={{
+					background: '#ffffff',
+					color: '#4285F4',
+					borderRadius: '50%',
+					width: '20px',
+					height: '20px',
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+					fontSize: '0.75em',
+					fontWeight: 'bold',
+				  }}
+				>
+				  {count}
+				</span>
+
+				{/* Botón X */}
+				<button
+				  onClick={() => toggleDisciplina(d)}
+				  style={{
+					marginLeft: '8px',
+					background: 'none',
+					border: 'none',
+					color: '#E53935',
+					fontSize: '1em',
+					lineHeight: '1',
+					cursor: 'pointer',
+				  }}
+				  title={`Quitar filtro ${d}`}
+				>
+				  ×
+				</button>
+			  </div>
+			);
+		  })}
+		</Box>
+
+		
       )}
 
       <div style={{ margin: '16px 0' }}>
