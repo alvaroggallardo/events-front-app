@@ -16,7 +16,6 @@ import {
   Heartbeat,
   Megaphone,
   MaskHappy,
-  Shapes,
   Star,
   CalendarCheck,
   Leaf,
@@ -141,11 +140,11 @@ const disciplinaIcons = {
   'Gastronomía': ForkKnife,
   'Sociedad / Inclusión': Users,
   'Divulgación / Institucional': Megaphone,
-  'Multidisciplinar': Shapes,
+  'Multidisciplinar': Users,
   'Actividades especiales': Star,
   'Eventos': CalendarCheck,
   'Deportes / Actividad Física': Users,
-  'Otros': Shapes,
+  'Otros': Users,
 };
 
 const disciplinaColors = {
@@ -181,7 +180,7 @@ function Evento({ item }) {
   const disciplina = item.disciplina || 'Otros';
   const hora = item.hora ? clean(item.hora) : '';
 
-  const IconComponent = disciplinaIcons[disciplina] || Shapes;
+  const IconComponent = disciplinaIcons[disciplina] || Star;
   const color = disciplinaColors[disciplina] || '#E0E0E0';
 
   const fechaBonita = item.fecha
