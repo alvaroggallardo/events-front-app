@@ -286,7 +286,7 @@ function Evento({ item }) {
 			  }}
 			  title="Ver evento"
 			>
-			  <Eye size={28} color="#ffffff" style={{ width: '28px', height: '28px' }} />
+			  <Eye size={isMobile ? 50 : 24} color="#ffffff" />
 			</button>
 		  )}
 
@@ -308,7 +308,7 @@ function Evento({ item }) {
 			  }}
 			  title="Ver en Maps"
 			>
-			  <MapTrifold size={28} color="#ffffff" style={{ width: '28px', height: '28px' }} />
+			  <MapTrifold size={isMobile ? 50 : 24} color="#ffffff" />
 			</button>
 		  )}
 
@@ -329,7 +329,7 @@ function Evento({ item }) {
 			}}
 			title="Añadir a Calendario"
 		  >
-			<CalendarCheck size={28} color="#ffffff" style={{ width: '28px', height: '28px' }} />
+			<CalendarCheck size={isMobile ? 50 : 24} color="#ffffff" />
 		  </button>
 
 		  {/* Compartir */}
@@ -349,7 +349,7 @@ function Evento({ item }) {
 			}}
 			title="Compartir evento"
 		  >
-			<ShareNetwork size={28} color="#ffffff" style={{ width: '28px', height: '28px' }} />
+			<ShareNetwork size={isMobile ? 50 : 24} color="#ffffff" />
 		  </button>
 		</div>
 
