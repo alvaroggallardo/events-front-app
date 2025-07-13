@@ -55,7 +55,7 @@ export default function ModalDisciplinas({
           {disciplinasOptions.map((disciplina) => {
             const isSelected = disciplinasSeleccionadas.includes(disciplina);
             const count = conteoInicial[disciplina] || 0;
-            const color = disciplinaColors[disciplina] || '#E0E0E0';
+            const color = '#4285F4';
 
             return (
               <FormControlLabel

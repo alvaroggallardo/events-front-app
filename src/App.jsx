@@ -387,8 +387,8 @@ export default function App() {
 
       {/* Botón para abrir el modal */}
       <Button variant="outlined" onClick={() => setModalOpen(true)}>
-	  {`Disciplinas: ${disciplinasSeleccionadas.length}`}
-	</Button>
+	  {`Disciplinas:`}
+	  </Button>
 
       {/* Modal */}
       <ModalDisciplinas
