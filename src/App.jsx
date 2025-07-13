@@ -184,6 +184,9 @@ const disciplinaColors = {
 ================================ */
 
 function Evento({ item }) {
+	
+  const isMobile = window.innerWidth <= 600;
+  
   if (!item) return null;
 
   const evento = item.evento ? clean(item.evento) : 'Evento sin título';
@@ -259,10 +262,7 @@ function Evento({ item }) {
           }}>{disciplina}</span>
         </div>
       </div>
-	  
-	  /* ================================
-		   Botones eventos
-		================================ */
+
       <div style={{marginTop: '12px', display: 'flex', gap: '12px', justifyContent: 'flex-end'}}>
 		  {/* Ver Evento */}
 		  {linkEvento !== '#' && (
@@ -282,7 +282,7 @@ function Evento({ item }) {
 			  }}
 			  title="Ver evento"
 			>
-			  <Eye size={24} color="#ffffff" />
+			  <Eye size={isMobile ? 50 : 24} color="#ffffff" />
 			</button>
 		  )}
 
@@ -304,7 +304,7 @@ function Evento({ item }) {
 			  }}
 			  title="Ver en Maps"
 			>
-			  <MapTrifold size={24} color="#ffffff" />
+			  <MapTrifold size={isMobile ? 50 : 24} color="#ffffff" />
 			</button>
 		  )}
 
@@ -325,7 +325,7 @@ function Evento({ item }) {
 			}}
 			title="Añadir a Calendario"
 		  >
-			<CalendarCheck size={24} color="#ffffff" />
+			<CalendarCheck size={isMobile ? 50 : 24} color="#ffffff" />
 		  </button>
 
 		  {/* Compartir */}
@@ -345,7 +345,7 @@ function Evento({ item }) {
 			}}
 			title="Compartir evento"
 		  >
-			<ShareNetwork size={24} color="#ffffff" />
+			<ShareNetwork size={isMobile ? 50 : 24} color="#ffffff" />
 		  </button>
 		</div>
 
