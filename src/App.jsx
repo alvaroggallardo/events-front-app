@@ -459,6 +459,8 @@ export default function App() {
 					justifyContent: 'center',
 					fontSize: '0.8em',
 					cursor: 'pointer',
+					padding: 0,
+					lineHeight: '20px',
 					transition: 'background 0.3s, color 0.3s',
 				  }}
 				  onMouseOver={(e) => {
@@ -473,6 +475,8 @@ export default function App() {
 				>
 				  ×
 				</button>
+
+				
 			  </div>
 			);
 		  })}
