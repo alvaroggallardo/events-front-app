@@ -247,12 +247,64 @@ function Evento({ item }) {
           <IconComponent color="#fff" size={28} />
         </div>
         <div style={{ flex: 1 }}>
-          <h2 style={{ margin: 0, fontSize: '1.2em' }}>{evento}</h2>
-          {fechaBonita && <p>{fechaBonita}</p>}
-          {fechaBonitaFin && fechaBonitaFin !== fechaBonita && <p>Hasta {fechaBonitaFin}</p>}
-          {hora && <p>{hora}</p>}
-          {lugarParseado.nombre && <p>{lugarParseado.nombre}</p>}
-          <span style={{
+
+		  <h2 style={{
+			margin: '0 0 4px 0',
+			fontSize: '1.2em',
+			fontWeight: 600,
+			color: '#333333',
+			lineHeight: '1.3'
+		  }}>
+			{evento}
+		  </h2>
+
+		  {fechaBonita && (
+			<p style={{
+			  margin: 0,
+			  fontSize: '0.95em',
+			  color: '#666666',
+			  lineHeight: '1.4'
+			}}>
+			  {fechaBonita}
+			</p>
+		  )}
+
+		  {fechaBonitaFin && fechaBonitaFin !== fechaBonita && (
+			<p style={{
+			  margin: 0,
+			  fontSize: '0.9em',
+			  color: '#999999',
+			  lineHeight: '1.4'
+			}}>
+			  Hasta {fechaBonitaFin}
+			</p>
+		  )}
+
+		  {hora && (
+			<p style={{
+			  margin: 0,
+			  fontSize: '0.95em',
+			  color: '#666666',
+			  lineHeight: '1.4'
+			}}>
+			  {hora}
+			</p>
+		  )}
+
+		  {lugarParseado.nombre && (
+			<p style={{
+			  margin: '8px 0 0 0',
+			  fontSize: '0.95em',
+			  color: '#777777',
+			  lineHeight: '1.4'
+			}}>
+			  {lugarParseado.nombre}
+			</p>
+		  )}
+		</div>
+
+          
+		  <span style={{
             background: color,
             padding: '4px 8px',
             borderRadius: '8px',
@@ -417,7 +469,7 @@ export default function App() {
   });
 
   return (
-    <div style={{ maxWidth: '900px', margin: '0 auto', padding: '24px' }}>
+    <div style={{ width: '100%', padding: '16px' }}>
       <h1 style={{ textAlign: 'center', color: '#673ab7' }}>
         Cosas que hacer en Asturias
       </h1>
