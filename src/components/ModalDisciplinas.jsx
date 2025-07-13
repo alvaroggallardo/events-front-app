@@ -11,6 +11,14 @@ import {
 
 /**
  * Modal que muestra todas las disciplinas para seleccionarlas.
+ *
+ * Props:
+ * - open: si el modal está abierto
+ * - onClose: función para cerrar el modal
+ * - disciplinasOptions: lista de nombres de disciplinas
+ * - disciplinasSeleccionadas: array de disciplinas seleccionadas
+ * - toggleDisciplina: función para añadir/quitar disciplina
+ * - conteoInicial: objeto { disciplina: cantidad }
  */
 export default function ModalDisciplinas({
   open,
@@ -18,7 +26,7 @@ export default function ModalDisciplinas({
   disciplinasOptions,
   disciplinasSeleccionadas,
   toggleDisciplina,
-  conteoPorDisciplina,
+  conteoInicial,
 }) {
   return (
     <Modal open={open} onClose={onClose}>
@@ -40,10 +48,11 @@ export default function ModalDisciplinas({
         <Typography variant="h6" sx={{ mb: 2 }}>
           Selecciona disciplinas
         </Typography>
+
         <FormGroup>
           {disciplinasOptions.map((disciplina) => {
             const isSelected = disciplinasSeleccionadas.includes(disciplina);
-            const count = conteoPorDisciplina[disciplina] || 0;
+            const count = conteoInicial[disciplina] || 0;
 
             return (
               <FormControlLabel
@@ -59,6 +68,7 @@ export default function ModalDisciplinas({
             );
           })}
         </FormGroup>
+
         <Button
           variant="contained"
           sx={{ mt: 2 }}

@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import ModalDisciplinas from './components/ModalDisciplinas.jsx';
-import { Chip, Button, Box } from '@mui/material';
+import { Button, Box } from '@mui/material';
 
 import {
   MusicNote,
@@ -23,17 +23,12 @@ import {
   Star,
   CalendarCheck,
   Leaf,
-  ShareNetwork,
-  Eye,
 } from "phosphor-react";
 
 /* ================================
    Funciones utilitarias
 ================================ */
 
-/**
- * Limpia un texto eliminando caracteres raros.
- */
 function clean(txt) {
   if (txt === null || txt === undefined) return '';
   return String(txt)
@@ -42,9 +37,6 @@ function clean(txt) {
     .trim();
 }
 
-/**
- * Parsear el campo lugar en objeto { nombre, url }
- */
 function parseLugar(lugar) {
   if (!lugar) return { nombre: '', url: '' };
 
@@ -72,9 +64,6 @@ function parseLugar(lugar) {
   }
 }
 
-/**
- * Añadir un evento a Google Calendar
- */
 function addToGoogleCalendar(evento) {
   const title = encodeURIComponent(evento.evento || "Evento sin título");
   const details = encodeURIComponent(evento.evento);
@@ -103,9 +92,6 @@ function addToGoogleCalendar(evento) {
   window.open(url, "_blank");
 }
 
-/**
- * Compartir un evento copiándolo al portapapeles.
- */
 function shareEvento(evento) {
   const title = evento.evento || "Evento sin título";
   const disciplina = evento.disciplina || "";
@@ -296,6 +282,7 @@ export default function App() {
   const [textoBusqueda, setTextoBusqueda] = useState('');
   const [snackbarVisible, setSnackbarVisible] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [conteoInicial, setConteoInicial] = useState({});
 
   useEffect(() => {
     const hoy = new Date();
@@ -304,18 +291,19 @@ export default function App() {
     const url = `https://web-production-1f968.up.railway.app/eventos?fecha_inicio=${formato(hoy)}&fecha_fin=${formato(fin)}`;
     fetch(url, { method: 'GET' })
       .then((res) => res.json())
-      .then((data) => setEventos(data))
+      .then((data) => {
+        setEventos(data);
+        const totalConteo = data.reduce((acc, ev) => {
+          const disciplina = ev.disciplina || 'Otros';
+          acc[disciplina] = (acc[disciplina] || 0) + 1;
+          return acc;
+        }, {});
+        setConteoInicial(totalConteo);
+      })
       .catch(console.error);
   }, []);
 
-  const disciplinasOptions = [
-    'Actividades especiales', 'Artes Escénicas', 'Artes Visuales', 'Cine', 'Conferencias',
-    'Cultura Tradicional', 'Danza', 'Deportes / Actividad Física', 'Divulgación / Institucional',
-    'Eventos', 'Fiestas', 'Formación / Taller', 'Gastronomía', 'Itinerarios Patrimoniales',
-    'Literatura', 'Medio Ambiente', 'Multidisciplinar', 'Música', 'Narración Oral',
-    'Otros', 'Público Infantil / Familiar', 'Salud y Bienestar', 'Sociedad / Inclusión',
-    'Tecnología / Innovación'
-  ];
+  const disciplinasOptions = Object.keys(disciplinaIcons);
 
   const toggleDisciplina = (d) => {
     if (disciplinasSeleccionadas.includes(d)) {
@@ -344,12 +332,6 @@ export default function App() {
     return true;
   });
 
-  const conteoPorDisciplina = eventosFiltrados.reduce((acc, ev) => {
-    if (!acc[ev.disciplina]) acc[ev.disciplina] = 0;
-    acc[ev.disciplina]++;
-    return acc;
-  }, {});
-
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '24px' }}>
       <h1 style={{ textAlign: 'center', color: '#673ab7' }}>
@@ -366,7 +348,19 @@ export default function App() {
           marginBottom: '16px'
         }}>
           Mostrando solo eventos de los próximos 7 días. Si quieres buscar más adelante usa los botones de fecha.
-          <button style={{ marginLeft: '16px', background: '#fff', color: '#673ab7', border: 'none', borderRadius: '4px', padding: '4px 8px' }} onClick={() => setSnackbarVisible(false)}>OK</button>
+          <button
+            style={{
+              marginLeft: '16px',
+              background: '#fff',
+              color: '#673ab7',
+              border: 'none',
+              borderRadius: '4px',
+              padding: '4px 8px'
+            }}
+            onClick={() => setSnackbarVisible(false)}
+          >
+            OK
+          </button>
         </div>
       )}
 
@@ -405,21 +399,63 @@ export default function App() {
         disciplinasOptions={disciplinasOptions}
         disciplinasSeleccionadas={disciplinasSeleccionadas}
         toggleDisciplina={toggleDisciplina}
-        conteoPorDisciplina={conteoPorDisciplina}
+        conteoPorDisciplina={conteoInicial}
       />
 
       {/* Chips seleccionadas */}
       {disciplinasSeleccionadas.length > 0 && (
         <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-          {disciplinasSeleccionadas.map((disciplina) => (
-            <Chip
-              key={disciplina}
-              label={disciplina}
-              onDelete={() => toggleDisciplina(disciplina)}
-              color="primary"
-              variant="outlined"
-            />
-          ))}
+          {disciplinasSeleccionadas.map((d) => {
+            const count = conteoInicial[d] || 0;
+            const color = disciplinaColors[d] || '#E0E0E0';
+            return (
+              <div
+                key={d}
+                style={{
+                  backgroundColor: color,
+                  color: '#333',
+                  borderRadius: '24px',
+                  padding: '8px 12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontWeight: 'bold',
+                  fontSize: '0.9em',
+                }}
+              >
+                <span style={{ marginRight: '8px' }}>{d}</span>
+                <span
+                  style={{
+                    background: 'white',
+                    color: color,
+                    borderRadius: '50%',
+                    width: '24px',
+                    height: '24px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '0.8em',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {count}
+                </span>
+                <button
+                  onClick={() => toggleDisciplina(d)}
+                  style={{
+                    marginLeft: '8px',
+                    background: 'none',
+                    border: 'none',
+                    color: '#E53935',
+                    fontSize: '1.1em',
+                    cursor: 'pointer',
+                  }}
+                  title={`Quitar filtro ${d}`}
+                >
+                  ×
+                </button>
+              </div>
+            );
+          })}
         </Box>
       )}
 
