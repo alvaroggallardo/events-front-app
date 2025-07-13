@@ -246,25 +246,49 @@ function Evento({ item }) {
         }}>
           <IconComponent color="#fff" size={28} />
         </div>
-        <div style={{ flex: 1 }}>
 		
-          <h2 style={{ margin: 0, fontSize: '1.2em' }}>{evento}</h2>
-          {fechaBonita && <p style={{margin: '2px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.3'}}>
-				{fechaBonita}
-			</p>}
-          {fechaBonitaFin && <p style={{margin: '2px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.3'}}>
-          {hora && <p style={{margin: '2px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.3'}}>
-          {lugarParseado.nombre && <p style={{margin: '2px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.3'}}>
-          
-		  <span style={{
-            background: color,
-            padding: '4px 8px',
-            borderRadius: '8px',
-            color: '#333',
-            fontWeight: 'bold',
-            fontSize: '0.8em'
-          }}>{disciplina}</span>
-        </div>
+		<div style={{ flex: 1 }}>
+		  <h2 style={{ margin: 0, fontSize: '1.2em' }}>{evento}</h2>
+
+		  {fechaBonita && (
+			<p style={{ margin: '4px 0', fontSize: '0.95em', color: '#555', lineHeight: '1.4' }}>
+			  {fechaBonita}
+			</p>
+		  )}
+
+		  {fechaBonitaFin && fechaBonitaFin !== fechaBonita && (
+			<p style={{ margin: '4px 0', fontSize: '0.95em', color: '#555', lineHeight: '1.4' }}>
+			  Hasta {fechaBonitaFin}
+			</p>
+		  )}
+
+		  {hora && (
+			<p style={{ margin: '4px 0', fontSize: '0.95em', color: '#555', lineHeight: '1.4' }}>
+			  {hora}
+			</p>
+		  )}
+
+		  {lugarParseado.nombre && (
+			<p style={{ margin: '4px 0', fontSize: '0.95em', color: '#555', lineHeight: '1.4' }}>
+			  {lugarParseado.nombre}
+			</p>
+		  )}
+
+		  <span
+			style={{
+			  background: color,
+			  padding: '4px 8px',
+			  borderRadius: '8px',
+			  color: '#333',
+			  fontWeight: 'bold',
+			  fontSize: '0.8em'
+			}}
+		  >
+			{disciplina}
+		  </span>
+		</div>
+
+		
       </div>
 
       <div style={{marginTop: '12px', display: 'flex', gap: '12px', justifyContent: 'flex-end'}}>
