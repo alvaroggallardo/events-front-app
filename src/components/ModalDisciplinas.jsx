@@ -19,6 +19,7 @@ import {
  * - disciplinasSeleccionadas: array de disciplinas seleccionadas
  * - toggleDisciplina: función para añadir/quitar disciplina
  * - conteoInicial: objeto { disciplina: cantidad }
+ * - disciplinaColors: objeto { disciplina: color }
  */
 export default function ModalDisciplinas({
   open,
@@ -27,6 +28,7 @@ export default function ModalDisciplinas({
   disciplinasSeleccionadas,
   toggleDisciplina,
   conteoInicial,
+  disciplinaColors
 }) {
   return (
     <Modal open={open} onClose={onClose}>
@@ -53,6 +55,7 @@ export default function ModalDisciplinas({
           {disciplinasOptions.map((disciplina) => {
             const isSelected = disciplinasSeleccionadas.includes(disciplina);
             const count = conteoInicial[disciplina] || 0;
+            const color = disciplinaColors[disciplina] || '#E0E0E0';
 
             return (
               <FormControlLabel
@@ -61,6 +64,12 @@ export default function ModalDisciplinas({
                   <Checkbox
                     checked={isSelected}
                     onChange={() => toggleDisciplina(disciplina)}
+                    sx={{
+                      color,
+                      '&.Mui-checked': {
+                        color,
+                      }
+                    }}
                   />
                 }
                 label={`${disciplina} (${count})`}

@@ -394,13 +394,14 @@ export default function App() {
 
       {/* Modal */}
       <ModalDisciplinas
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        disciplinasOptions={disciplinasOptions}
-        disciplinasSeleccionadas={disciplinasSeleccionadas}
-        toggleDisciplina={toggleDisciplina}
-        conteoPorDisciplina={conteoInicial}
-      />
+		  open={modalOpen}
+		  onClose={() => setModalOpen(false)}
+		  disciplinasOptions={disciplinasOptions}
+		  disciplinasSeleccionadas={disciplinasSeleccionadas}
+		  toggleDisciplina={toggleDisciplina}
+		  conteoInicial={conteoInicial}
+		  disciplinaColors={disciplinaColors}
+		/>
 
       {/* Chips seleccionadas */}
       {disciplinasSeleccionadas.length > 0 && (
