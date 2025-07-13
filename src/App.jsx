@@ -249,10 +249,12 @@ function Evento({ item }) {
         <div style={{ flex: 1 }}>
 		
           <h2 style={{ margin: 0, fontSize: '1.2em' }}>{evento}</h2>
-          {fechaBonita && <p>{fechaBonita}</p>}
-          {fechaBonitaFin && fechaBonitaFin !== fechaBonita && <p>Hasta {fechaBonitaFin}</p>}
-          {hora && <p>{hora}</p>}
-          {lugarParseado.nombre && <p>{lugarParseado.nombre}</p>}
+          {fechaBonita && <p style={{margin: '4px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.4'}}>
+				{fechaBonita}
+			</p>}
+          {fechaBonitaFin && <p style={{margin: '4px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.4'}}>
+          {hora && <p style={{margin: '4px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.4'}}>
+          {lugarParseado.nombre && <p style={{margin: '4px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.4'}}>
           
 		  <span style={{
             background: color,
@@ -284,7 +286,7 @@ function Evento({ item }) {
 			  }}
 			  title="Ver evento"
 			>
-			  <Eye size={isMobile ? 50 : 24} color="#ffffff" />
+			  <Eye size={28} color="#ffffff" style={{ width: '28px', height: '28px' }} />
 			</button>
 		  )}
 
@@ -306,7 +308,7 @@ function Evento({ item }) {
 			  }}
 			  title="Ver en Maps"
 			>
-			  <MapTrifold size={isMobile ? 50 : 24} color="#ffffff" />
+			  <MapTrifold size={28} color="#ffffff" style={{ width: '28px', height: '28px' }} />
 			</button>
 		  )}
 
@@ -327,7 +329,7 @@ function Evento({ item }) {
 			}}
 			title="Añadir a Calendario"
 		  >
-			<CalendarCheck size={isMobile ? 50 : 24} color="#ffffff" />
+			<CalendarCheck size={28} color="#ffffff" style={{ width: '28px', height: '28px' }} />
 		  </button>
 
 		  {/* Compartir */}
@@ -347,7 +349,7 @@ function Evento({ item }) {
 			}}
 			title="Compartir evento"
 		  >
-			<ShareNetwork size={isMobile ? 50 : 24} color="#ffffff" />
+			<ShareNetwork size={28} color="#ffffff" style={{ width: '28px', height: '28px' }} />
 		  </button>
 		</div>
 
