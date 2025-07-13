@@ -413,7 +413,7 @@ export default function App() {
               <div
                 key={d}
                 style={{
-                  backgroundColor: color,
+                  backgroundColor: '#1976d2',
                   color: '#333',
                   borderRadius: '24px',
                   padding: '8px 12px',
@@ -446,7 +446,7 @@ export default function App() {
                     marginLeft: '8px',
                     background: 'none',
                     border: 'none',
-                    color: '#E53935',
+                    color: '#1976d2',
                     fontSize: '1.1em',
                     cursor: 'pointer',
                   }}
