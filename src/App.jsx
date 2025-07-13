@@ -268,7 +268,7 @@ function Evento({ item }) {
       </div>
 
       <div style={{marginTop: '12px', display: 'flex', gap: '12px', justifyContent: 'flex-end'}}>
-		  {/* Ver Evento */}
+		  {/* Ver Evento d */}
 		  {linkEvento !== '#' && (
 			<button
 			  onClick={() => window.open(linkEvento, "_blank")}
