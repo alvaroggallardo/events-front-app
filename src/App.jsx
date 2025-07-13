@@ -256,16 +256,97 @@ function Evento({ item }) {
           }}>{disciplina}</span>
         </div>
       </div>
-      <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
-        {linkEvento !== '#' && (
-          <button onClick={() => window.open(linkEvento, "_blank")}>Ver Evento</button>
-        )}
-        {mapsLink !== '#' && (
-          <button onClick={() => window.open(mapsLink, "_blank")}>Ver en Maps</button>
-        )}
-        <button onClick={() => addToGoogleCalendar(item)}>Añadir a Calendar</button>
-        <button onClick={() => shareEvento(item)}>Compartir</button>
-      </div>
+	  
+	  /* ================================
+		   Botones eventos
+		================================ */
+      <div style={{marginTop: '12px', display: 'flex', gap: '12px', justifyContent: 'flex-end'}}>
+		  {/* Ver Evento */}
+		  {linkEvento !== '#' && (
+			<button
+			  onClick={() => window.open(linkEvento, "_blank")}
+			  style={{
+				background: '#7B1FA2', // morado
+				border: 'none',
+				borderRadius: '50%',
+				width: '48px',
+				height: '48px',
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				cursor: 'pointer',
+				boxShadow: '0 2px 5px rgba(0,0,0,0.3)',
+			  }}
+			  title="Ver evento"
+			>
+			  <Eye size={24} color="#ffffff" />
+			</button>
+		  )}
+
+		  {/* Ver en Maps */}
+		  {mapsLink !== '#' && (
+			<button
+			  onClick={() => window.open(mapsLink, "_blank")}
+			  style={{
+				background: '#009688', // verde
+				border: 'none',
+				borderRadius: '50%',
+				width: '48px',
+				height: '48px',
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				cursor: 'pointer',
+				boxShadow: '0 2px 5px rgba(0,0,0,0.3)',
+			  }}
+			  title="Ver en Maps"
+			>
+			  <MapTrifold size={24} color="#ffffff" />
+			</button>
+		  )}
+
+		  {/* Añadir a calendario */}
+		  <button
+			onClick={() => addToGoogleCalendar(item)}
+			style={{
+			  background: '#FF7043', // naranja
+			  border: 'none',
+			  borderRadius: '50%',
+			  width: '48px',
+			  height: '48px',
+			  display: 'flex',
+			  justifyContent: 'center',
+			  alignItems: 'center',
+			  cursor: 'pointer',
+			  boxShadow: '0 2px 5px rgba(0,0,0,0.3)',
+			}}
+			title="Añadir a Calendario"
+		  >
+			<CalendarCheck size={24} color="#ffffff" />
+		  </button>
+
+		  {/* Compartir */}
+		  <button
+			onClick={() => shareEvento(item)}
+			style={{
+			  background: '#FDD835', // amarillo
+			  border: 'none',
+			  borderRadius: '50%',
+			  width: '48px',
+			  height: '48px',
+			  display: 'flex',
+			  justifyContent: 'center',
+			  alignItems: 'center',
+			  cursor: 'pointer',
+			  boxShadow: '0 2px 5px rgba(0,0,0,0.3)',
+			}}
+			title="Compartir evento"
+		  >
+			<ShareNetwork size={24} color="#ffffff" />
+		  </button>
+		</div>
+
+	  
     </div>
   );
 }
