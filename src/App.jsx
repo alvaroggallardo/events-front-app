@@ -387,9 +387,8 @@ export default function App() {
 
       {/* Botón para abrir el modal */}
       <Button variant="outlined" onClick={() => setModalOpen(true)}>
-        {disciplinasSeleccionadas.length > 0
-          `Disciplinas: ${disciplinasSeleccionadas.length}`
-      </Button>
+	  {`Disciplinas: ${disciplinasSeleccionadas.length}`}
+	</Button>
 
       {/* Modal */}
       <ModalDisciplinas
@@ -405,30 +404,28 @@ export default function App() {
       {/* Chips seleccionadas */}
       {disciplinasSeleccionadas.length > 0 && (
 	  
-       <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+      <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
 		  {disciplinasSeleccionadas.map((d) => {
-			  
 			const count = conteoInicial[d] || 0;
 
 			return (
 			  <div
 				key={d}
 				style={{
-				  backgroundColor: '#4285F4',
-				  color: '#ffffff',
-				  borderRadius: '16px',
-				  padding: '4px 10px',
-				  display: 'flex',
+				  display: 'inline-flex',
 				  alignItems: 'center',
+				  padding: '4px 12px',
+				  background: 'linear-gradient(135deg, #4A90E2, #4285F4)',
+				  borderRadius: '20px',
+				  color: '#ffffff',
 				  fontWeight: '500',
 				  fontSize: '0.85em',
 				  height: '32px',
 				}}
 			  >
-				{/* Nombre de disciplina */}
 				<span style={{ marginRight: '8px' }}>{d}</span>
 
-				{/* Circulito con número */}
+				{/* Número en circulito blanco */}
 				<span
 				  style={{
 					background: '#ffffff',
@@ -441,6 +438,7 @@ export default function App() {
 					justifyContent: 'center',
 					fontSize: '0.75em',
 					fontWeight: 'bold',
+					marginRight: '8px',
 				  }}
 				>
 				  {count}
@@ -450,13 +448,26 @@ export default function App() {
 				<button
 				  onClick={() => toggleDisciplina(d)}
 				  style={{
-					marginLeft: '8px',
-					background: 'none',
+					background: '#ffffff',
+					color: '#4285F4',
+					borderRadius: '50%',
+					width: '20px',
+					height: '20px',
 					border: 'none',
-					color: '#E53935',
-					fontSize: '1em',
-					lineHeight: '1',
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+					fontSize: '0.8em',
 					cursor: 'pointer',
+					transition: 'background 0.3s, color 0.3s',
+				  }}
+				  onMouseOver={(e) => {
+					e.target.style.background = '#4285F4';
+					e.target.style.color = '#ffffff';
+				  }}
+				  onMouseOut={(e) => {
+					e.target.style.background = '#ffffff';
+					e.target.style.color = '#4285F4';
 				  }}
 				  title={`Quitar filtro ${d}`}
 				>
@@ -466,6 +477,7 @@ export default function App() {
 			);
 		  })}
 		</Box>
+
 
 		
       )}
