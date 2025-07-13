@@ -1,7 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { addDays } from 'date-fns';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
+import ModalDisciplinas from './components/ModalDisciplinas.jsx';
+import { Chip, Button, Box } from '@mui/material';
+
 import {
   MusicNote,
   FilmSlate,
@@ -23,15 +27,24 @@ import {
   Eye,
 } from "phosphor-react";
 
+/* ================================
+   Funciones utilitarias
+================================ */
+
+/**
+ * Limpia un texto eliminando caracteres raros.
+ */
 function clean(txt) {
   if (txt === null || txt === undefined) return '';
-
   return String(txt)
     .replace(/[^\x20-\x7EáéíóúÁÉÍÓÚñÑüÜ.,:;()¿?¡!/\-\"'\n]+/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }
 
+/**
+ * Parsear el campo lugar en objeto { nombre, url }
+ */
 function parseLugar(lugar) {
   if (!lugar) return { nombre: '', url: '' };
 
@@ -49,22 +62,19 @@ function parseLugar(lugar) {
     }
 
     if (lugar.startsWith('http')) {
-      return {
-        nombre: '',
-        url: lugar
-      };
+      return { nombre: '', url: lugar };
     }
 
-    return {
-      nombre: clean(lugar) || '',
-      url: ''
-    };
+    return { nombre: clean(lugar) || '', url: '' };
   } catch (e) {
     console.error("Error parseando lugar:", e);
     return { nombre: '', url: '' };
   }
 }
 
+/**
+ * Añadir un evento a Google Calendar
+ */
 function addToGoogleCalendar(evento) {
   const title = encodeURIComponent(evento.evento || "Evento sin título");
   const details = encodeURIComponent(evento.evento);
@@ -93,6 +103,9 @@ function addToGoogleCalendar(evento) {
   window.open(url, "_blank");
 }
 
+/**
+ * Compartir un evento copiándolo al portapapeles.
+ */
 function shareEvento(evento) {
   const title = evento.evento || "Evento sin título";
   const disciplina = evento.disciplina || "";
@@ -120,6 +133,10 @@ ${link ? `🔗 Más info: ${link}` : ""}
     .then(() => alert("¡Evento copiado al portapapeles!"))
     .catch(err => console.error("Error copiando texto:", err));
 }
+
+/* ================================
+   Diccionarios de iconos y colores
+================================ */
 
 const disciplinaIcons = {
   'Cine': FilmSlate,
@@ -172,6 +189,10 @@ const disciplinaColors = {
   'Deportes / Actividad Física': '#FFB74D',
   'Otros': '#E0E0E0',
 };
+
+/* ================================
+   Componente Evento
+================================ */
 
 function Evento({ item }) {
   if (!item) return null;
@@ -263,6 +284,10 @@ function Evento({ item }) {
   );
 }
 
+/* ================================
+   Componente principal
+================================ */
+
 export default function App() {
   const [eventos, setEventos] = useState([]);
   const [disciplinasSeleccionadas, setDisciplinasSeleccionadas] = useState([]);
@@ -270,6 +295,7 @@ export default function App() {
   const [fechaFin, setFechaFin] = useState(null);
   const [textoBusqueda, setTextoBusqueda] = useState('');
   const [snackbarVisible, setSnackbarVisible] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const hoy = new Date();
@@ -344,6 +370,7 @@ export default function App() {
         </div>
       )}
 
+      {/* Filtros */}
       <div style={{ display: 'flex', gap: '16px', marginBottom: '16px', flexWrap: 'wrap' }}>
         <div>
           <label>Fecha inicio:</label><br />
@@ -355,22 +382,54 @@ export default function App() {
         </div>
         <div style={{ flexGrow: 1 }}>
           <label>Buscar:</label><br />
-          <input value={textoBusqueda} onChange={(e) => setTextoBusqueda(e.target.value)} style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }} placeholder="Buscar evento..." />
+          <input
+            value={textoBusqueda}
+            onChange={(e) => setTextoBusqueda(e.target.value)}
+            style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+            placeholder="Buscar evento..."
+          />
         </div>
       </div>
 
-      <div style={{ marginBottom: '16px' }}>
-        <button onClick={() => setDisciplinasSeleccionadas([])}>Quitar filtros</button>
-        <div style={{ marginTop: '8px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-          {disciplinasOptions.map((d) => (
-            <label key={d} style={{ display: 'flex', alignItems: 'center' }}>
-              <input type="checkbox" checked={disciplinasSeleccionadas.includes(d)} onChange={() => toggleDisciplina(d)} />
-              <span style={{ marginLeft: '4px' }}>{d} ({conteoPorDisciplina[d] || 0})</span>
-            </label>
+      {/* Botón para abrir el modal */}
+      <Button variant="outlined" onClick={() => setModalOpen(true)}>
+        {disciplinasSeleccionadas.length > 0
+          ? `Seleccionadas: ${disciplinasSeleccionadas.length}`
+          : 'Seleccionar disciplinas'}
+      </Button>
+
+      {/* Modal */}
+      <ModalDisciplinas
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        disciplinasOptions={disciplinasOptions}
+        disciplinasSeleccionadas={disciplinasSeleccionadas}
+        toggleDisciplina={toggleDisciplina}
+        conteoPorDisciplina={conteoPorDisciplina}
+      />
+
+      {/* Chips seleccionadas */}
+      {disciplinasSeleccionadas.length > 0 && (
+        <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+          {disciplinasSeleccionadas.map((disciplina) => (
+            <Chip
+              key={disciplina}
+              label={disciplina}
+              onDelete={() => toggleDisciplina(disciplina)}
+              color="primary"
+              variant="outlined"
+            />
           ))}
-        </div>
+        </Box>
+      )}
+
+      <div style={{ margin: '16px 0' }}>
+        <Button variant="contained" color="secondary" onClick={() => setDisciplinasSeleccionadas([])}>
+          Quitar filtros
+        </Button>
       </div>
 
+      {/* Lista de eventos */}
       {eventosFiltrados.length === 0 && <p>No se encontraron eventos.</p>}
       {eventosFiltrados.map(ev => (
         <Evento key={ev.id} item={ev} />
