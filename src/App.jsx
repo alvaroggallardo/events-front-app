@@ -23,7 +23,10 @@ import {
   Star,
   CalendarCheck,
   Leaf,
+  Eye,
+  ShareNetwork,
 } from "phosphor-react";
+
 
 /* ================================
    Funciones utilitarias
