@@ -249,12 +249,12 @@ function Evento({ item }) {
         <div style={{ flex: 1 }}>
 		
           <h2 style={{ margin: 0, fontSize: '1.2em' }}>{evento}</h2>
-          {fechaBonita && <p style={{margin: '4px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.4'}}>
+          {fechaBonita && <p style={{margin: '2px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.3'}}>
 				{fechaBonita}
 			</p>}
-          {fechaBonitaFin && <p style={{margin: '4px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.4'}}>
-          {hora && <p style={{margin: '4px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.4'}}>
-          {lugarParseado.nombre && <p style={{margin: '4px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.4'}}>
+          {fechaBonitaFin && <p style={{margin: '2px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.3'}}>
+          {hora && <p style={{margin: '2px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.3'}}>
+          {lugarParseado.nombre && <p style={{margin: '2px 0', ontSize: '0.95em', color: '#555', lineHeight: '1.3'}}>
           
 		  <span style={{
             background: color,
@@ -286,7 +286,7 @@ function Evento({ item }) {
 			  }}
 			  title="Ver evento"
 			>
-			  <Eye size={isMobile ? 50 : 24} color="#ffffff" />
+			  <Eye size={isMobile ? 28 : 28} color="#ffffff" />
 			</button>
 		  )}
 
@@ -308,7 +308,7 @@ function Evento({ item }) {
 			  }}
 			  title="Ver en Maps"
 			>
-			  <MapTrifold size={isMobile ? 50 : 24} color="#ffffff" />
+			  <MapTrifold size={isMobile ? 28: 28} color="#ffffff" />
 			</button>
 		  )}
 
@@ -329,7 +329,7 @@ function Evento({ item }) {
 			}}
 			title="Añadir a Calendario"
 		  >
-			<CalendarCheck size={isMobile ? 50 : 24} color="#ffffff" />
+			<CalendarCheck size={isMobile ? 28: 28} color="#ffffff" />
 		  </button>
 
 		  {/* Compartir */}
@@ -349,7 +349,7 @@ function Evento({ item }) {
 			}}
 			title="Compartir evento"
 		  >
-			<ShareNetwork size={isMobile ? 50 : 24} color="#ffffff" />
+			<ShareNetwork size={isMobile ? 28 : 28} color="#ffffff" />
 		  </button>
 		</div>
 
