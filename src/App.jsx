@@ -444,6 +444,13 @@ export default function App() {
     return true;
   });
 
+	// ✅ ORDENAR LOS EVENTOS POR FECHA
+	const eventosFiltradosOrdenados = [...eventosFiltrados].sort((a, b) => {
+	  const fechaA = new Date(a.fecha || '2100-01-01');
+	  const fechaB = new Date(b.fecha || '2100-01-01');
+	  return fechaA - fechaB;
+	});
+
   return (
     <div style={{ width: '100%', padding: '16px' }}>
       <h1 style={{ textAlign: 'center', color: '#673ab7' }}>
@@ -605,10 +612,11 @@ export default function App() {
       </div>
 
       {/* Lista de eventos */}
-      {eventosFiltrados.length === 0 && <p>No se encontraron eventos.</p>}
-      {eventosFiltrados.map(ev => (
-        <Evento key={ev.id} item={ev} />
-      ))}
+      {eventosFiltradosOrdenados.length === 0 && <p>No se encontraron eventos.</p>}
+		{eventosFiltradosOrdenados.map(ev => (
+		  <Evento key={ev.id} item={ev} />
+		))}
+	  
     </div>
   );
 }
