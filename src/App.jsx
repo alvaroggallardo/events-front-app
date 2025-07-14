@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { addDays } from 'date-fns';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -444,12 +444,14 @@ export default function App() {
     return true;
   });
 
-	// ✅ ORDENAR LOS EVENTOS POR FECHA
-	const eventosFiltradosOrdenados = [...eventosFiltrados].sort((a, b) => {
-	  const fechaA = new Date(a.fecha || '2100-01-01');
-	  const fechaB = new Date(b.fecha || '2100-01-01');
-	  return fechaA - fechaB;
-	});
+	// ✅ ORDENAR LOS EVENTOS POR FECHA y usando memoria
+	const eventosFiltradosOrdenados = useMemo(() => {
+	  return [...eventosFiltrados].sort((a, b) => {
+		const fechaA = new Date(a.fecha || '2100-01-01');
+		const fechaB = new Date(b.fecha || '2100-01-01');
+		return fechaA - fechaB;
+	  });
+	}, [eventosFiltrados]);
 
   return (
     <div style={{ width: '100%', padding: '16px' }}>
