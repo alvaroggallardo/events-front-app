@@ -8,23 +8,8 @@ import {
   CalendarCheck,
   Eye,
   MapTrifold,
-  ShareNetwork,
-  MusicNote,
-  FilmSlate,
-  Palette,
-  BookOpen,
-  Users,
-  Microphone,
-  Robot,
-  ForkKnife,
-  Baby,
-  Heartbeat,
-  Megaphone,
-  MaskHappy,
-  Star,
-  Leaf
+  ShareNetwork
 } from "phosphor-react";
-
 
 // Iconos y colores
 import { disciplinaIcons, disciplinaColors } from '../utils/disciplinaMaps';

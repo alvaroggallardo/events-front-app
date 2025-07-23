@@ -1,4 +1,23 @@
-const disciplinaIcons = {
+import {
+  MusicNote,
+  FilmSlate,
+  Palette,
+  BookOpen,
+  Users,
+  Microphone,
+  Robot,
+  MapTrifold,
+  ForkKnife,
+  Baby,
+  Heartbeat,
+  Megaphone,
+  MaskHappy,
+  Star,
+  CalendarCheck,
+  Leaf
+} from "phosphor-react";
+
+export const disciplinaIcons = {
   'Cine': FilmSlate,
   'Artes Escénicas': MaskHappy,
   'Música': MusicNote,
@@ -24,7 +43,7 @@ const disciplinaIcons = {
   'Otros': Users,
 };
 
-const disciplinaColors = {
+export const disciplinaColors = {
   'Cine': '#FFE4E1',
   'Artes Escénicas': '#E1F5FE',
   'Música': '#FFF9C4',
@@ -49,5 +68,3 @@ const disciplinaColors = {
   'Deportes / Actividad Física': '#FFB74D',
   'Otros': '#E0E0E0',
 };
-
-export { disciplinaIcons, disciplinaColors };
