@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { addDays } from 'date-fns';
+import { addDays, endOfMonth, format } from 'date-fns';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -26,7 +26,6 @@ import {
   Eye,
   ShareNetwork,
 } from "phosphor-react";
-
 
 /* ================================
    Funciones utilitarias
@@ -396,24 +395,28 @@ export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [conteoInicial, setConteoInicial] = useState({});
 
-  useEffect(() => {
-    const hoy = new Date();
-    const fin = addDays(hoy, 7);
-    const formato = (d) => d.toISOString().split("T")[0];
-    const url = `https://web-production-1f968.up.railway.app/eventos?fecha_inicio=${formato(hoy)}&fecha_fin=${formato(fin)}`;
-    fetch(url, { method: 'GET' })
-      .then((res) => res.json())
-      .then((data) => {
-        setEventos(data);
-        const totalConteo = data.reduce((acc, ev) => {
-          const disciplina = ev.disciplina || 'Otros';
-          acc[disciplina] = (acc[disciplina] || 0) + 1;
-          return acc;
-        }, {});
-        setConteoInicial(totalConteo);
-      })
-      .catch(console.error);
-  }, []);
+useEffect(() => {
+	
+  const hoy = new Date();
+  const finMes = endOfMonth(hoy);
+  const formato = (d) => d.toISOString().split("T")[0];
+
+  const url = `https://web-production-1f968.up.railway.app/eventos?fecha_inicio=${formato(hoy)}&fecha_fin=${formato(finMes)}`;
+  
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      setEventos(data);
+      const totalConteo = data.reduce((acc, ev) => {
+        const disciplina = ev.disciplina || 'Otros';
+        acc[disciplina] = (acc[disciplina] || 0) + 1;
+        return acc;
+      }, {});
+      setConteoInicial(totalConteo);
+    })
+    .catch(console.error);
+}, []);
+
 
   const disciplinasOptions = Object.keys(disciplinaIcons);
 
