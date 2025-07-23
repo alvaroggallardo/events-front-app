@@ -398,10 +398,10 @@ export default function App() {
 useEffect(() => {
 	
   const hoy = new Date();
-  const finMes = endOfMonth(hoy);
+  const finRango = addDays(hoy, 30); 
   const formato = (d) => d.toISOString().split("T")[0];
 
-  const url = `https://web-production-1f968.up.railway.app/eventos?fecha_inicio=${formato(hoy)}&fecha_fin=${formato(finMes)}`;
+  const url = `https://web-production-1f968.up.railway.app/eventos?fecha_inicio=${formato(hoy)}&fecha_fin=${formato(finRango)}`;
   
   fetch(url)
     .then((res) => res.json())
@@ -428,24 +428,30 @@ useEffect(() => {
     }
   };
 
-  const eventosFiltrados = eventos.filter((e) => {
-    if (fechaInicio || fechaFin) {
-      const evStart = e.fecha ? new Date(e.fecha) : null;
-      const evEnd = e.fecha_fin ? new Date(e.fecha_fin) : evStart;
-      const filtroInicio = fechaInicio || new Date('1900-01-01');
-      const filtroFin = fechaFin || new Date('2999-12-31');
-      if (!(evStart <= filtroFin && evEnd >= filtroInicio)) return false;
-    }
-    if (disciplinasSeleccionadas.length > 0 && !disciplinasSeleccionadas.includes(e.disciplina)) {
-      return false;
-    }
-    if (textoBusqueda.trim() !== '') {
-      const searchLower = textoBusqueda.trim().toLowerCase();
-      const campos = [e.evento || '', e.disciplina || '', e.lugar || '', e.link || ''].join(' ').toLowerCase();
-      if (!campos.includes(searchLower)) return false;
-    }
-    return true;
-  });
+  const fechaLimiteInicial = addDays(new Date(), 7);
+
+	const eventosFiltrados = eventos.filter((e) => {
+	  const evStart = e.fecha ? new Date(e.fecha) : null;
+	  const evEnd = e.fecha_fin ? new Date(e.fecha_fin) : evStart;
+
+	  // Aplicar filtro por defecto si el usuario no ha seleccionado fechas
+	  const filtroInicio = fechaInicio || new Date();
+	  const filtroFin = fechaFin || fechaLimiteInicial;
+
+	  if (!(evStart <= filtroFin && evEnd >= filtroInicio)) return false;
+
+	  if (disciplinasSeleccionadas.length > 0 && !disciplinasSeleccionadas.includes(e.disciplina)) {
+		return false;
+	  }
+
+	  if (textoBusqueda.trim() !== '') {
+		const searchLower = textoBusqueda.trim().toLowerCase();
+		const campos = [e.evento || '', e.disciplina || '', e.lugar || '', e.link || ''].join(' ').toLowerCase();
+		if (!campos.includes(searchLower)) return false;
+	  }
+
+	  return true;
+	});
 
 	// ✅ ORDENAR LOS EVENTOS POR FECHA y usando memoria
 	const eventosFiltradosOrdenados = useMemo(() => {
