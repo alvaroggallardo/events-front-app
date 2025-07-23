@@ -4,7 +4,27 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ModalDisciplinas from '../components/ModalDisciplinas.jsx';
 import { Button, Box } from '@mui/material';
-import { CalendarCheck, Eye, MapTrifold, ShareNetwork } from "phosphor-react";
+import {
+  CalendarCheck,
+  Eye,
+  MapTrifold,
+  ShareNetwork,
+  MusicNote,
+  FilmSlate,
+  Palette,
+  BookOpen,
+  Users,
+  Microphone,
+  Robot,
+  ForkKnife,
+  Baby,
+  Heartbeat,
+  Megaphone,
+  MaskHappy,
+  Star,
+  Leaf
+} from "phosphor-react";
+
 
 // Iconos y colores
 import { disciplinaIcons, disciplinaColors } from '../utils/disciplinaMaps';
