@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Eventos from "./pages/Eventos.jsx";
-import Favoritos from "./pages/Favoritos.jsx";
+import Info from "./pages/Info.jsx";
 
 export default function App() {
   const location = useLocation();
@@ -10,7 +10,7 @@ export default function App() {
     <div style={{ paddingBottom: '60px', minHeight: '100vh' }}>
       <Routes>
         <Route path="/" element={<Eventos />} />
-        <Route path="/favoritos" element={<Favoritos />} />
+        <Route path="/info" element={<Info />} />
       </Routes>
 
       <div style={{
@@ -39,16 +39,16 @@ export default function App() {
           📅 Eventos
         </button>
         <button
-          onClick={() => navigate("/favoritos")}
+          onClick={() => navigate("/info")}
           style={{
             flex: 1,
-            background: location.pathname === "/favoritos" ? '#eee' : 'white',
+            background: location.pathname === "/info" ? '#eee' : 'white',
             border: 'none',
             fontSize: '1em',
             height: '100%'
           }}
         >
-          ⭐ Favoritos
+          📖 Info
         </button>
       </div>
     </div>

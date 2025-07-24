@@ -14,7 +14,7 @@ export default function Favoritos() {
 
       <Box
         component="img"
-        src="/assets/images/helena.png"
+        src="../assets/images/helena.png"
         alt="Helena"
         sx={{ width: 200, height: 200, objectFit: 'contain', mb: 3 }}
       />
