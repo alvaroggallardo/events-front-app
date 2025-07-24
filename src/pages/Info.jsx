@@ -13,11 +13,11 @@ export default function Favoritos() {
       </Typography>
 
       <Box
-        component="img"
-        src="../../public/helena.png"
-        alt="Helena"
-        sx={{ width: 200, height: 200, objectFit: 'contain', mb: 3 }}
-      />
+		  component="img"
+		  src="/helena.png"
+		  alt="Helena"
+		  sx={{ width: 200, height: 200, objectFit: 'contain', mb: 3 }}
+		/>
 
       <Button
         variant="outlined"
