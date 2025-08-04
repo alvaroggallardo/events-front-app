@@ -112,6 +112,7 @@ export default function EventosPage() {
 
   useEffect(() => {
     const hoy = new Date();
+	hoy.setHours(0, 0, 0, 0);
     const finRango = addDays(hoy, 30);
     const formato = (d) => d.toISOString().split("T")[0];
     const url = `https://web-production-1f968.up.railway.app/eventos?fecha_inicio=${formato(hoy)}&fecha_fin=${formato(finRango)}`;
@@ -131,12 +132,17 @@ export default function EventosPage() {
   }, []);
 
   const fechaLimiteInicial = addDays(new Date(), 7);
-
+	fechaLimiteInicial.setHours(23, 59, 59, 999);
+	
   const eventosFiltradosOrdenados = useMemo(() => {
     const filtrados = eventos.filter((e) => {
       const evStart = e.fecha ? new Date(e.fecha) : null;
       const evEnd = e.fecha_fin ? new Date(e.fecha_fin) : evStart;
-      const filtroInicio = fechaInicio || new Date();
+      const filtroInicio = fechaInicio || (() => {
+	  const d = new Date();
+		  d.setHours(0, 0, 0, 0);
+		  return d;
+	  })();
       const filtroFin = fechaFin || fechaLimiteInicial;
       if (!(evStart <= filtroFin && evEnd >= filtroInicio)) return false;
       if (disciplinasSeleccionadas.length > 0 && !disciplinasSeleccionadas.includes(e.disciplina)) return false;
