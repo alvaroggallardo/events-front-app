@@ -115,7 +115,7 @@ export default function EventosPage() {
 	hoy.setHours(0, 0, 0, 0);
     const finRango = addDays(hoy, 30);
     const formato = (d) => d.toISOString().split("T")[0];
-    const url = `https://web-production-1f968.up.railway.app/eventos?fecha_inicio=${formato(hoy)}&fecha_fin=${formato(finRango)}`;
+    const url = `https://spread-production-b053.up.railway.app/eventos?fecha_inicio=${formato(hoy)}&fecha_fin=${formato(finRango)}`;
 
     fetch(url)
       .then((res) => res.json())
