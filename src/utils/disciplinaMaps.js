@@ -15,7 +15,7 @@ import {
   Star,
   CalendarCheck,
   Leaf,
-  PartyPopper
+  Confetti
 } from "phosphor-react";
 
 export const disciplinaIcons = {
@@ -41,7 +41,7 @@ export const disciplinaIcons = {
   'Actividades especiales': Star,
   'Eventos': CalendarCheck,
   'Deportes / Actividad Física': Users,
-  'Fiestas': PartyPopper,
+  'Fiestas': Confetti,
   'Otros': Users,
 };
 
