@@ -14,7 +14,8 @@ import {
   MaskHappy,
   Star,
   CalendarCheck,
-  Leaf
+  Leaf,
+  PartyPopper
 } from "phosphor-react";
 
 export const disciplinaIcons = {
@@ -40,6 +41,7 @@ export const disciplinaIcons = {
   'Actividades especiales': Star,
   'Eventos': CalendarCheck,
   'Deportes / Actividad Física': Users,
+  'Fiestas': PartyPopper,
   'Otros': Users,
 };
 
@@ -66,5 +68,6 @@ export const disciplinaColors = {
   'Actividades especiales': '#FFCCBC',
   'Eventos': '#FFE0B2',
   'Deportes / Actividad Física': '#FFB74D',
+  'Fiestas': '#F48FB1',
   'Otros': '#E0E0E0',
 };
